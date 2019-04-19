@@ -1,0 +1,33 @@
+.container {
+  margin:100rpx 50rpx 50rpx 100rpx;
+}
+
+.nameBar{
+  margin-bottom: 20rpx;
+  margin-top: 10rpx;
+  width: 90%;
+}
+
+.name {
+  width:20%;
+  text-align: left;
+  float: left;
+  margin-right: 10rpx;
+  padding-right: 5%;
+}
+
+.changeScore {
+  margin-right: 10rpx;
+  float: right;
+  text-align: center;
+}
+
+.page-bd{
+  margin-bottom: 40%;
+}
+
+.page-ft{
+  padding-bottom: 10rpx;
+  text-align: center;
+  color:grey;
+}

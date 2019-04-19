@@ -1,0 +1,23 @@
+<!--index.wxml-->
+
+<view class="page__hd">
+  <view class="page__title">小游戏积分榜</view>
+  <view class="page__desc">快速记录每个人的分数。</view>
+</view>
+
+<view class="page-bd">
+  <view class="container">
+    <block class="name-list" wx:for="{{namelist}}" wx:key="unique">
+      <view class='nameBar'>
+        <view class='name'>{{item.name}}</view>
+        <view class='name'>{{item.score}}</view>
+        <button class='changeScore' type="primary" size="mini" data-player="{{index}}" bindtap='addScore'>+</button>
+        <button class='changeScore' type="warn" size="mini" data-player="{{index}}" bindtap='minusScore'>-</button>
+      </view>
+    </block>
+  </view>
+</view>
+
+<view class="page-ft">
+  designed by: Wang Yu
+</view>
