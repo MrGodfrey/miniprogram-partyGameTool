@@ -8,11 +8,14 @@ Page({
     namelist: [],
     deleteState: "None",
     deleteString: "删除玩家",
-    deleteReverse: "inline"
+    deleteType: "warn",
+    deleteReverse: "block",
+    optionHide: "None",
+    addValue: 1,
   },
 
   onLoad: function() {
-    var res=wx.getStorageSync('namelist')
+    var res = wx.getStorageSync('namelist')
     var len = res.length
     for (var i = 0; i < len; i++) {
       var newplayer = {}
@@ -36,23 +39,40 @@ Page({
     })
   },
 
-  onUnload: function () {
+  optionTap: function(e) {
+    if (this.data.optionHide === "None") {
+      this.setData({
+        optionHide: "inline",
+      })
+    } else {
+      this.setData({
+        optionHide: "None",
+      })
+    }
+  },
+
+  onUnload: function() {
     this.storge()
   },
 
   deletePlayer: function(e) {
     var index = e.target.dataset.player
-    this.data.namelist.splice(index,1)
+    this.data.namelist.splice(index, 1)
     this.setData({
       namelist: this.data.namelist,
     })
     this.storge()
   },
 
+  sliderChange: function(e) {
+    this.setData({
+      addValue: e.detail.value,
+    })
+  },
 
   addScore: function(e) {
     var index = e.target.dataset.player
-    this.data.namelist[index].score += 1
+    this.data.namelist[index].score += this.data.addValue
     this.setData({
       namelist: this.data.namelist
     })
@@ -60,7 +80,7 @@ Page({
   },
   minusScore: function(e) {
     var index = e.target.dataset.player
-    this.data.namelist[index].score -= 1
+    this.data.namelist[index].score -= this.data.addValue
     this.setData({
       namelist: this.data.namelist
     })
@@ -68,29 +88,33 @@ Page({
   },
 
   nameinput: function(e) {
-    var newplayer={}
+    var newplayer = {}
     newplayer.name = e.detail.value
-    newplayer.score=0
+    newplayer.score = 0
     this.data.namelist.push(newplayer)
     this.setData({
       namelist: this.data.namelist
     })
     this.storge()
   },
- 
+
+  
+
   deleteChangeStyle: function(e) {
     if (this.data.deleteState === "None") {
+      console.log(e)
       this.setData({
         deleteState: "inline",
         deleteReverse: "None",
-        deleteString: "取消"
+        deleteString: "完成",
+        deleteType: "primary"
       })
-    }
-    else {
+    } else {
       this.setData({
         deleteState: "None",
-        deleteReverse: "inline",
-        deleteString: "删除玩家"
+        deleteReverse: "block",
+        deleteString: "删除玩家",
+        deleteType: "warn"
       })
     }
   }

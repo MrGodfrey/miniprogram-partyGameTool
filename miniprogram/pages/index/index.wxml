@@ -1,5 +1,7 @@
 <!--index.wxml-->
 
+
+
 <view class="page__hd">
   <view class="page__title">玩家积分榜</view>
   <view class="page__desc">快速记录每个玩家的分数</view>
@@ -13,24 +15,30 @@
         <view class='name'>{{item.name}}</view>
         <view class='name score'>{{item.score}}</view>
         <view style='display: {{deleteReverse}}'>
-          <button class='changeScore' type="primary" size="mini" data-player="{{index}}" bindtap='addScore'>+</button>
-          <button class='changeScore' type="info" size="mini" data-player="{{index}}" bindtap='minusScore'>-</button>
+          <button class='changeScore' type="primary" size="mini" data-player="{{index}}" bindtap='addScore'>+{{addValue}}</button>
+          <button class='changeScore' type="info" size="mini" data-player="{{index}}" bindtap='minusScore'>-{{addValue}}</button>
         </view>
       </view>
     </block>
   </view>
 
-
-
-
-  <view   style='display: {{deleteReverse}}'>
-  <input class='name-input' placeholder='输入新玩家'  confirm-type='send' bindconfirm='nameinput'></input>
+  <view class='optionIcon' style='display: {{deleteReverse}}' >
+    <icon type="info_circle" size="23" bindtap='optionTap'></icon>
   </view>
 
-  <view>
-    <button class='deletePlayer' bindtap='deleteChangeStyle' type='warn'>{{deleteString}}</button>
-  </view>
+  <view class='option' style='display: {{optionHide}}'>
 
+    <slider  bindchanging='sliderChange'  style='display: {{deleteReverse}}' class='slider' show-value value="{{addValue}}" min='1' max='30'/>
+
+
+    <view class='name-input-tag' style='display: {{deleteReverse}}'>
+      <input class='name-input' placeholder=' 新玩家' confirm-type='send' bindconfirm='nameinput'></input>
+    </view>
+
+    <view>
+      <button class='deletePlayer' bindtap='deleteChangeStyle' type='{{deleteType}}'>{{deleteString}}</button>
+    </view>
+  </view>
 
 </view>
 

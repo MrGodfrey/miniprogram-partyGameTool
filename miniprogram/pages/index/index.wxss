@@ -10,6 +10,13 @@
   width: 100%;
 }
 
+.slider {
+  display: block ;
+  width: 80%;
+  margin: 20rpx auto;
+  margin-bottom: 40rpx;
+}
+
 .name {
   width: 30%;
   text-align: left;
@@ -19,6 +26,7 @@
 }
 .score {
   width: 20rpx;
+  text-align: right;
 }
 
 .changeScore {
@@ -28,20 +36,35 @@
   text-align: center;
 }
 
-.name-input {
+.name-input-tag {
   width: 80%;
   margin: 0 auto;
-  padding: 15rpx;
-  height: 100%;
+  height: 45px;
+}
+
+.name-input {
+  width: 100%;
+  text-align: left;
+  margin: 0 auto;
+  height: inherit;
   display: block;
-  border: 1px solid #ccc;
+  border-width: 1px;
+  border-style: solid;
+  border-color: grey;
   border-radius: 5px;
-  box-sizing: border-box;
 }
 
 .delete {
   float: left;
   margin-right: 20%;
+}
+
+.optionIcon {
+  display: block;
+  width: 80%;
+  margin: 20rpx auto;
+  text-align: center;
+  padding-bottom: 20rpx;
 }
 
 .deletePlayer{
