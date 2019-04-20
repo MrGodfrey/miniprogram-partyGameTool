@@ -26,8 +26,8 @@
       </view>
     </block>
   </view>
-    <view class='name-input-tag' style='display: {{deleteReverse}}'>
-      <input class='name-input' placeholder=' 新玩家' confirm-type='send' bindconfirm='nameinput' value="{{inputValue}}" ></input>
+    <view class='input-tag' style='display: {{deleteReverse}}'>
+      <input class='input' placeholder=' 新玩家' confirm-type='send' bindconfirm='nameinput' value="{{inputValue}}" ></input>
     </view>
 
   <view class='optionIcon' style='display: {{deleteReverse}}' >

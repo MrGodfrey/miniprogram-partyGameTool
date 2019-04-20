@@ -1,2 +1,15 @@
 <!--miniprogram/pages/mask/mask.wxml-->
-<text>miniprogram/pages/mask/mask.wxml</text>
+<view class="page__hd">
+  <view class="page__title">谁是卧底</view>
+</view>
+
+<view class='page__bd'>
+
+  <view class='input-tag' style='display: {{deleteReverse}}'>
+    <input class='input' placeholder=' 加入房间' confirm-type='send' bindconfirm='HomeIDinput' value="{{inputValue}}"></input>
+  </view>
+
+  <button bindtap='HomeIDinput'>fuck</button>
+
+
+</view>

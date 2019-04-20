@@ -1,0 +1,29 @@
+<!--miniprogram/pages/mask/existHome/existHome.wxml-->
+<view class="page__hd">
+  <view class="page__title"># {{id}}
+  </view>
+
+<view class='page__bd'>
+
+  <view> 你好 {{playerList[plindex].name}} </view>
+
+  <view wx:if="{{joined === false}}" class='input-tag' style='display: {{deleteReverse}}'>
+    <input class='input' placeholder='输入姓名' confirm-type='send' bindconfirm='nameInput' value="{{inputValue}}"> </input>
+    {{joined}}
+  </view>
+
+  <view class='container'>
+    <block class="name-list" wx:for="{{playerList}}" wx:key='name'>
+      <view class='name'>{{item.name}}</view>
+      <view class='score'>{{item.score}}</view>
+    </block>
+  </view>
+
+  <button bindtap='quitHome'>退出房间</button>
+
+</view>
+
+
+
+
+</view>

@@ -48,3 +48,20 @@ page {
   font-size: 14px;
 }
 
+.input-tag {
+  width: 80%;
+  margin: 20rpx auto;
+  height: 45px;
+}
+
+.input {
+  text-align: left;
+  margin: 0 auto;
+  padding: 0 0 0 30rpx;
+  height: inherit;
+  display: block;
+  border-width: 1px;
+  border-style: solid;
+  border-color: grey;
+  border-radius: 5px;
+}
