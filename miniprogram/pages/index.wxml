@@ -1,0 +1,31 @@
+<!--index.wxml-->
+
+
+
+<view class="page__hd">
+  <view class="page__title">聚会游戏工具</view>
+  <view class="page__desc">各种实用的工具汇总</view>
+</view>
+
+
+
+<view class="page__bd">
+
+<view  class=' nav'>
+<navigator url='scoreBoard/scoreBoard' >
+<view class='nav-item'> 积分榜 </view>
+</navigator>
+</view>
+
+<view  class=' nav'>
+<navigator url='mask/mask' >
+<view class='nav-item'> 谁是卧底 </view>
+</navigator>
+</view>
+
+
+</view>
+
+<view class="page__ft">
+  designed by: Wang Yu
+</view>

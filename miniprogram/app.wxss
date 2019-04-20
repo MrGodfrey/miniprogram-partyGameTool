@@ -1,11 +1,14 @@
 /**app.wxss**/
-@import 'style/weui.wxss';
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+}
+
+.page__bd {
+  padding-bottom: 500rpx;
 }
 
 page {
@@ -18,9 +21,7 @@ page {
   padding: 40px;
 }
 
-.page__bd {
-  padding-bottom: 40px;
-}
+
 
 .page__bd_spacing {
   padding-left: 15px;
@@ -28,8 +29,10 @@ page {
 }
 
 .page__ft {
+  margin-top: 50rpx;
   padding-bottom: 10px;
   text-align: center;
+  color: grey;
 }
 
 .page__title {
@@ -44,3 +47,4 @@ page {
   text-align: center;
   font-size: 14px;
 }
+

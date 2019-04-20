@@ -1,15 +1,16 @@
+<!--miniprogram/pages/scoreBoard/scoreBoard.wxml-->
 <!--index.wxml-->
 
 
 
 <view class="page__hd">
-  <view class="page__title">玩家积分榜</view>
+  <view class="page__title">积分榜</view>
   <view class="page__desc">快速记录每个玩家的分数</view>
 </view>
 
 
 
-<view class="page-bd">
+<view class="page__bd">
 
   
   <view class="container">
@@ -19,8 +20,8 @@
         <view class='name'>{{item.name}}</view>
         <view class='name score'>{{item.score}}</view>
         <view style='display: {{deleteReverse}}'>
-          <button class='changeScore' type="primary" size="mini" data-player="{{index}}" bindtap='addScore'>+{{addValue}}</button>
-          <button class='changeScore' type="info" size="mini" data-player="{{index}}" bindtap='minusScore'>-{{addValue}}</button>
+          <button class='changeScore' type="primary" data-player="{{index}}" bindtap='addScore'>+{{addValue}}</button>
+          <button class='changeScore' type="info"  data-player="{{index}}" bindtap='minusScore'>-{{addValue}}</button>
         </view>
       </view>
     </block>
@@ -30,7 +31,7 @@
     </view>
 
   <view class='optionIcon' style='display: {{deleteReverse}}' >
-    <icon type="info_circle" size="23" bindtap='optionTap'></icon>
+    <icon type="info_circle" size="35" bindtap='optionTap'></icon>
   </view>
 
   <view class='option' style='display: {{optionHide}}'>
@@ -42,10 +43,12 @@
     <view>
       <button class='deletePlayer' bindtap='deleteChangeStyle' type='{{deleteType}}'>{{deleteString}}</button>
     </view>
+
   </view>
 
 </view>
 
-<view class="page-ft">
+    <view class="page__ft">
   designed by: Wang Yu
 </view>
+

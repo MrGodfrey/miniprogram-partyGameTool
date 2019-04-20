@@ -15,7 +15,7 @@ Page({
     inputValue: "",
   },
 
-  onLoad: function() {
+  onLoad: function () {
     var res = wx.getStorageSync('namelist')
     var len = res.length
     for (var i = 0; i < len; i++) {
@@ -29,18 +29,18 @@ Page({
     })
   },
 
-  onHide: function() {
+  onHide: function () {
     this.storge()
   },
 
-  storge: function() {
+  storge: function () {
     wx.setStorage({
       key: 'namelist',
       data: this.data.namelist,
     })
   },
 
-  optionTap: function(e) {
+  optionTap: function (e) {
     if (this.data.optionHide === "None") {
       this.setData({
         optionHide: "inline",
@@ -52,11 +52,11 @@ Page({
     }
   },
 
-  onUnload: function() {
+  onUnload: function () {
     this.storge()
   },
 
-  deletePlayer: function(e) {
+  deletePlayer: function (e) {
     var index = e.target.dataset.player
     this.data.namelist.splice(index, 1)
     this.setData({
@@ -65,13 +65,13 @@ Page({
     this.storge()
   },
 
-  sliderChange: function(e) {
+  sliderChange: function (e) {
     this.setData({
       addValue: e.detail.value,
     })
   },
 
-  addScore: function(e) {
+  addScore: function (e) {
     var index = e.target.dataset.player
     this.data.namelist[index].score += this.data.addValue
     this.setData({
@@ -79,7 +79,7 @@ Page({
     })
     this.storge()
   },
-  minusScore: function(e) {
+  minusScore: function (e) {
     var index = e.target.dataset.player
     this.data.namelist[index].score -= this.data.addValue
     this.setData({
@@ -88,7 +88,7 @@ Page({
     this.storge()
   },
 
-  nameinput: function(e) {
+  nameinput: function (e) {
     console.log(e)
     var newplayer = {}
     newplayer.name = e.detail.value
@@ -101,9 +101,9 @@ Page({
     this.storge()
   },
 
-  
 
-  deleteChangeStyle: function(e) {
+
+  deleteChangeStyle: function (e) {
     if (this.data.deleteState === "None") {
       console.log(e)
       this.setData({
