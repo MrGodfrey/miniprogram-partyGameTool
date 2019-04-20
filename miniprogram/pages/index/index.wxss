@@ -1,11 +1,13 @@
 .container {
-  margin: 100rpx 0rpx 100rpx 0rpx;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 50rpx;
 }
 
 .nameBar {
   margin-bottom: 20rpx;
   margin-top: 10rpx;
-  width: 90%;
+  width: 100%;
 }
 
 .name {
@@ -20,8 +22,8 @@
 }
 
 .changeScore {
-  width: 80rpx;
-  margin-right: 30rpx;
+  width: 120rpx;
+  margin-left: 30rpx;
   float: right;
   text-align: center;
 }
@@ -29,10 +31,11 @@
 .name-input {
   width: 80%;
   margin: 0 auto;
-  height: 80rpx;
+  padding: 15rpx;
+  height: 100%;
   display: block;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
   box-sizing: border-box;
 }
 
