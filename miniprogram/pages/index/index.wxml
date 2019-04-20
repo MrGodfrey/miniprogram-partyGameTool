@@ -9,13 +9,29 @@
   <view class="container">
     <block class="name-list" wx:for="{{namelist}}" wx:key="unique">
       <view class='nameBar'>
+        <button class='delete' style='display: {{deleteState}}' type="warn" size='mini' bindtap='deletePlayer' data-player="{{index}}">删除</button>
         <view class='name'>{{item.name}}</view>
-        <view class='name'>{{item.score}}</view>
-        <button class='changeScore' type="primary" size="mini" data-player="{{index}}" bindtap='addScore'>+</button>
-        <button class='changeScore' type="warn" size="mini" data-player="{{index}}" bindtap='minusScore'>-</button>
+        <view class='name score'>{{item.score}}</view>
+        <view style='display: {{deleteReverse}}'>
+          <button class='changeScore' type="primary" size="mini" data-player="{{index}}" bindtap='addScore'>+</button>
+          <button class='changeScore' type="info" size="mini" data-player="{{index}}" bindtap='minusScore'>-</button>
+        </view>
       </view>
     </block>
   </view>
+
+
+
+
+  <view   style='display: {{deleteReverse}}'>
+  <input class='name-input' placeholder='输入新玩家'  confirm-type='send' bindconfirm='nameinput'></input>
+  </view>
+
+  <view>
+    <button class='deletePlayer' bindtap='deleteChangeStyle' type='warn'>{{deleteString}}</button>
+  </view>
+
+
 </view>
 
 <view class="page-ft">

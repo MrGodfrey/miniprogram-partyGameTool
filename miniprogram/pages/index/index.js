@@ -5,51 +5,94 @@ const db = wx.cloud.database()
 
 Page({
   data: {
-    namelist: [
-      {
-        name: "李伟宇",
-        score: 0,
-        unique: "unique_1",
-      },
-      {
-        name: "黄泽宇",
-        score: 0,
-        unique: "unique_2",
-      },
-      {
-        name: "张  荣",
-        score: 0,
-        unique: "unique_3",
-      },
-      {
-        name: "黄金丽",
-        score: 0,
-        unique: "unique_4",
-      },
-      {
-        name: "王 宇",
-        score: 0,
-        unique: "unique_5",
-      },
-    ],
+    namelist: [],
+    deleteState: "None",
+    deleteString: "删除玩家",
+    deleteReverse: "inline"
   },
 
-  onLoad: function() {},
+  onLoad: function() {
+    var res=wx.getStorageSync('namelist')
+    var len = res.length
+    for (var i = 0; i < len; i++) {
+      var newplayer = {}
+      newplayer.name = res[i].name
+      newplayer.score = res[i].score
+      this.data.namelist.push(newplayer)
+    }
+    this.setData({
+      namelist: this.data.namelist
+    })
+  },
+
+  onHide: function() {
+    this.storge()
+  },
+
+  storge: function() {
+    wx.setStorage({
+      key: 'namelist',
+      data: this.data.namelist,
+    })
+  },
+
+  onUnload: function () {
+    this.storge()
+  },
+
+  deletePlayer: function(e) {
+    var index = e.target.dataset.player
+    this.data.namelist.splice(index,1)
+    this.setData({
+      namelist: this.data.namelist,
+    })
+    this.storge()
+  },
+
 
   addScore: function(e) {
-    var index=e.target.dataset.player
-    this.data.namelist[index].score+=1
+    var index = e.target.dataset.player
+    this.data.namelist[index].score += 1
     this.setData({
       namelist: this.data.namelist
     })
+    this.storge()
   },
   minusScore: function(e) {
-    var index=e.target.dataset.player
-    this.data.namelist[index].score-=1
+    var index = e.target.dataset.player
+    this.data.namelist[index].score -= 1
     this.setData({
       namelist: this.data.namelist
     })
+    this.storge()
   },
-  
+
+  nameinput: function(e) {
+    var newplayer={}
+    newplayer.name = e.detail.value
+    newplayer.score=0
+    this.data.namelist.push(newplayer)
+    this.setData({
+      namelist: this.data.namelist
+    })
+    this.storge()
+  },
+ 
+  deleteChangeStyle: function(e) {
+    if (this.data.deleteState === "None") {
+      this.setData({
+        deleteState: "inline",
+        deleteReverse: "None",
+        deleteString: "取消"
+      })
+    }
+    else {
+      this.setData({
+        deleteState: "None",
+        deleteReverse: "inline",
+        deleteString: "删除玩家"
+      })
+    }
+  }
 
 })
