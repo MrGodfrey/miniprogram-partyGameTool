@@ -1,8 +1,8 @@
 <!--index.wxml-->
 
 <view class="page__hd">
-  <view class="page__title">小游戏积分榜</view>
-  <view class="page__desc">快速记录每个人的分数。</view>
+  <view class="page__title">玩家积分榜</view>
+  <view class="page__desc">快速记录每个玩家的分数</view>
 </view>
 
 <view class="page-bd">
