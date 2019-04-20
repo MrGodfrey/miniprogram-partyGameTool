@@ -12,6 +12,7 @@ Page({
     deleteReverse: "block",
     optionHide: "None",
     addValue: 1,
+    inputValue: "",
   },
 
   onLoad: function() {
@@ -88,12 +89,14 @@ Page({
   },
 
   nameinput: function(e) {
+    console.log(e)
     var newplayer = {}
     newplayer.name = e.detail.value
     newplayer.score = 0
     this.data.namelist.push(newplayer)
     this.setData({
-      namelist: this.data.namelist
+      namelist: this.data.namelist,
+      inputValue: ""
     })
     this.storge()
   },

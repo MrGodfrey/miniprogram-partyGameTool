@@ -7,7 +7,11 @@
   <view class="page__desc">快速记录每个玩家的分数</view>
 </view>
 
+
+
 <view class="page-bd">
+
+  
   <view class="container">
     <block class="name-list" wx:for="{{namelist}}" wx:key="unique">
       <view class='nameBar'>
@@ -21,6 +25,9 @@
       </view>
     </block>
   </view>
+    <view class='name-input-tag' style='display: {{deleteReverse}}'>
+      <input class='name-input' placeholder=' 新玩家' confirm-type='send' bindconfirm='nameinput' value="{{inputValue}}" ></input>
+    </view>
 
   <view class='optionIcon' style='display: {{deleteReverse}}' >
     <icon type="info_circle" size="23" bindtap='optionTap'></icon>
@@ -31,9 +38,6 @@
     <slider  bindchanging='sliderChange'  style='display: {{deleteReverse}}' class='slider' show-value value="{{addValue}}" min='1' max='30'/>
 
 
-    <view class='name-input-tag' style='display: {{deleteReverse}}'>
-      <input class='name-input' placeholder=' 新玩家' confirm-type='send' bindconfirm='nameinput'></input>
-    </view>
 
     <view>
       <button class='deletePlayer' bindtap='deleteChangeStyle' type='{{deleteType}}'>{{deleteString}}</button>

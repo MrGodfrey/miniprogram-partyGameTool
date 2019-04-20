@@ -38,14 +38,14 @@
 
 .name-input-tag {
   width: 80%;
-  margin: 0 auto;
+  margin: 20rpx auto;
   height: 45px;
 }
 
 .name-input {
-  width: 100%;
   text-align: left;
   margin: 0 auto;
+  padding: 0 0 0 30rpx;
   height: inherit;
   display: block;
   border-width: 1px;
@@ -62,7 +62,7 @@
 .optionIcon {
   display: block;
   width: 80%;
-  margin: 20rpx auto;
+  margin: 50rpx auto;
   text-align: center;
   padding-bottom: 20rpx;
 }
