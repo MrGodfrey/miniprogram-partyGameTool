@@ -48,7 +48,7 @@
 
     <view>
      <view>上传到云</view>
-     <switch bindchange='cloudSwitchChange'></switch>
+     <switch checked="{{cloudStore.cloudFlag}}" bindchange='cloudSwitchChange'></switch>
    
     </view>
 

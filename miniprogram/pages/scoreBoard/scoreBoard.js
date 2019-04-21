@@ -29,9 +29,12 @@ Page({
       this.data.namelist.push(newplayer)
     }
 
-    this.data.addValue = wx.getStorageSync('addValue') ? wx.getStorageSync('addValue'):1
+    this.data.addValue = wx.getStorageSync('addValue') ? wx.getStorageSync('addValue') : 1
 
-    this.data.cloud = wx.getStorageSync('cloudStore')
+    this.data.cloudStore = wx.getStorageSync('cloudStore') ? wx.getStorageSync('cloudStore') : {
+      cloudFlag: false,
+      homeid: ""
+    }
 
     this.setData({
       namelist: this.data.namelist,
@@ -45,17 +48,34 @@ Page({
   },
 
   storge: function() {
+    var that = this
     wx.setStorage({
       key: 'namelist',
-      data: this.data.namelist,
+      data: that.data.namelist,
     })
     wx.setStorage({
       key: 'addValue',
-      data: this.data.addValue,
+      data: that.data.addValue,
     })
     wx.setStorage({
       key: 'cloudStore',
-      cloudStore: this.data.cloudStore,
+      data: that.data.cloudStore,
+    })
+
+    if (this.data.cloudStore.cloudFlag) {
+      this.cloudUpdate()
+    }
+  },
+
+  cloudUpdate: function() {
+    var that = this
+    db.collection('scoreBoardHome').doc(this.data.cloudStore.homeid).update({
+      data: {
+        namelist: that.data.namelist
+      },
+      success(res) {
+        console.log(res)
+      }
     })
   },
 
@@ -96,7 +116,7 @@ Page({
     this.setData({
       namelist: this.data.namelist
     })
-    var that=this
+    var that = this
     wx.showToast({
       title: that.data.namelist[index].name + '  +' + that.data.addValue,
       icon: 'success',
@@ -157,9 +177,59 @@ Page({
 
   cloudSwitchChange: function(e) {
     this.data.cloudStore.cloudFlag = Boolean(e.detail.value)
-    
+
+    if (this.data.cloudStore.cloudFlag == true) {
+    // 上传到云服务器
+        this.createHome()
+    }
+
+    if (this.data.cloudStore.cloudFlag == false) {
+      // 从云服务器删除数据
+      if (this.data.cloudStore.homeid != "") {
+        this.deleteHome()
+      }
+    }
+
     this.setData({
       cloudStore: this.data.cloudStore
+    })
+    this.storge()
+  },
+
+  deleteHome: function() {
+    var that=this
+    db.collection('scoreBoardHome').doc(this.data.cloudStore.homeid).remove({
+      success(res) {
+        console.log(res)
+        that.data.cloudStore.homeid = ""
+        that.data.cloudStore.cloudFlag = false
+        that.setData({
+          cloudStore: that.data.cloudStore
+        })
+        that.storge()
+      }
+    })
+  },
+
+  createHome: function() {
+    // 暂时创建房号为1
+    var that = this
+    var id = "2"
+    db.collection('scoreBoardHome').add({
+      data: {
+        _id: id,
+        due: new Date(),
+        namelist: that.data.namelist
+      }
+    }).then(res => {
+      console.log(res)
+      that.data.cloudStore.homeid = id
+      that.setData({
+        cloudStore: that.data.cloudStore
+      })
+      that.storge()
+    }).catch(res=>{
+      console.error(res)
     })
   }
 
