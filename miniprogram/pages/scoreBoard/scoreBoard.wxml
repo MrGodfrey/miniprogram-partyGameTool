@@ -12,7 +12,9 @@
 
 <view class="page__bd">
 
-  
+  <view wx:if="{{cloudStore.cloudFlag}}" ># {{cloudStore.homeid}}</view>
+
+
   <view class="container">
     <block class="name-list" wx:for="{{namelist}}" wx:key="unique">
       <view class='nameBar'>
@@ -21,22 +23,22 @@
         <view class='name score'>{{item.score}}</view>
         <view style='display: {{deleteReverse}}'>
           <button class='changeScore' type="primary" data-player="{{index}}" bindtap='addScore'>+{{addValue}}</button>
-          <button class='changeScore' type="info"  data-player="{{index}}" bindtap='minusScore'>-{{addValue}}</button>
+          <button class='changeScore' type="info" data-player="{{index}}" bindtap='minusScore'>-{{addValue}}</button>
         </view>
       </view>
     </block>
   </view>
-    <view class='name-input-tag' style='display: {{deleteReverse}}'>
-      <input class='name-input' placeholder=' 新玩家' confirm-type='send' bindconfirm='nameinput' value="{{inputValue}}" ></input>
-    </view>
+  <view class='name-input-tag' style='display: {{deleteReverse}}'>
+    <input class='name-input' placeholder=' 新玩家' confirm-type='send' bindconfirm='nameinput' value="{{inputValue}}"></input>
+  </view>
 
-  <view class='optionIcon' style='display: {{deleteReverse}}' >
+  <view class='optionIcon' style='display: {{deleteReverse}}'>
     <icon type="info_circle" size="35" bindtap='optionTap'></icon>
   </view>
 
   <view class='option' style='display: {{optionHide}}'>
 
-    <slider  bindchanging='sliderChange'  style='display: {{deleteReverse}}' class='slider' show-value value="{{addValue}}" min='1' max='30'/>
+    <slider bindchanging='sliderChange' style='display: {{deleteReverse}}' class='slider' show-value value="{{addValue}}" min='1' max='30' />
 
 
 
@@ -44,11 +46,16 @@
       <button class='deletePlayer' bindtap='deleteChangeStyle' type='{{deleteType}}'>{{deleteString}}</button>
     </view>
 
+    <view>
+     <view>上传到云</view>
+     <switch bindchange='cloudSwitchChange'></switch>
+   
+    </view>
+
   </view>
 
 </view>
 
-    <view class="page__ft">
+<view class="page__ft">
   designed by: Wang Yu
 </view>
-

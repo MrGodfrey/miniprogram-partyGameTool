@@ -6,12 +6,16 @@ const db = wx.cloud.database()
 Page({
   data: {
     namelist: [],
+    addValue: 1,
+    cloudStore: {
+      cloudFlag: false,
+      homeid: ""
+    },
     deleteState: "None",
     deleteString: "删除玩家",
     deleteType: "warn",
     deleteReverse: "block",
     optionHide: "None",
-    addValue: 1,
     inputValue: "",
   },
 
@@ -24,8 +28,15 @@ Page({
       newplayer.score = res[i].score
       this.data.namelist.push(newplayer)
     }
+
+    this.data.addValue = wx.getStorageSync('addValue') ? wx.getStorageSync('addValue'):1
+
+    this.data.cloud = wx.getStorageSync('cloudStore')
+
     this.setData({
-      namelist: this.data.namelist
+      namelist: this.data.namelist,
+      addValue: this.data.addValue,
+      cloudStore: this.data.cloudStore
     })
   },
 
@@ -37,6 +48,14 @@ Page({
     wx.setStorage({
       key: 'namelist',
       data: this.data.namelist,
+    })
+    wx.setStorage({
+      key: 'addValue',
+      data: this.data.addValue,
+    })
+    wx.setStorage({
+      key: 'cloudStore',
+      cloudStore: this.data.cloudStore,
     })
   },
 
@@ -134,6 +153,14 @@ Page({
         deleteType: "warn"
       })
     }
+  },
+
+  cloudSwitchChange: function(e) {
+    this.data.cloudStore.cloudFlag = Boolean(e.detail.value)
+    
+    this.setData({
+      cloudStore: this.data.cloudStore
+    })
   }
 
 })
