@@ -17,11 +17,11 @@
 </navigator>
 </view>
 
-<view  class=' nav'>
+<!-- <view  class=' nav'>
 <navigator url='mask/mask' >
 <view class='nav-item'> 谁是卧底 </view>
 </navigator>
-</view>
+</view> -->
 
 
 </view>
