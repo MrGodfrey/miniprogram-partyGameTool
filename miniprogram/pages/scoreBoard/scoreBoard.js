@@ -3,6 +3,8 @@ const app = getApp()
 
 const db = wx.cloud.database()
 
+const dataBaseCollectionName = 'scoreBoardHome'
+
 Page({
   data: {
     namelist: [],
@@ -11,6 +13,7 @@ Page({
       cloudFlag: false,
       homeid: ""
     },
+    openid: "",
     deleteState: "None",
     deleteString: "删除玩家",
     deleteType: "warn",
@@ -31,16 +34,59 @@ Page({
 
     this.data.addValue = wx.getStorageSync('addValue') ? wx.getStorageSync('addValue') : 1
 
-    this.data.cloudStore = wx.getStorageSync('cloudStore') ? wx.getStorageSync('cloudStore') : {
-      cloudFlag: false,
-      homeid: ""
-    }
+    // 这里应当用云存储设置状态
+    // this.data.cloudStore = wx.getStorageSync('cloudStore') ? wx.getStorageSync('cloudStore') : {
+    //   cloudFlag: false,
+    //   homeid: ""
+    // }
+
+    // 设置云存储的状态，当前openid是否有云存储的房间号.
+    this.getCloudStatus()
+
 
     this.setData({
       namelist: this.data.namelist,
       addValue: this.data.addValue,
       cloudStore: this.data.cloudStore
     })
+  },
+
+  getCloudStatus: function() {
+    var that = this
+
+    wx.cloud.callFunction({
+      name: "login"
+    }).then(res => {
+      that.data.openid = res.result.openid
+      changeCloudStatus()
+
+    })
+
+    function changeCloudStatus() {
+      db.collection(dataBaseCollectionName).where({
+        _openid: that.data.openid
+      }).get().then(res=>{
+        // 没有记录
+        if(res.data.length==0){
+          that.data.cloudStore={
+            cloudFlag: false,
+            homeid: ""
+          }
+        }
+        // 有记录
+        else {
+          that.data.cloudStore = {
+            cloudFlag: true,
+            homeid: res.data[0]._id
+          }
+        }
+        that.setData({
+          cloudStore: that.data.cloudStore
+        })
+      }).catch(res=>{
+        console.error(res)
+      })
+    }
   },
 
   onHide: function() {
@@ -57,10 +103,11 @@ Page({
       key: 'addValue',
       data: that.data.addValue,
     })
-    wx.setStorage({
-      key: 'cloudStore',
-      data: that.data.cloudStore,
-    })
+    // 不能本地存储云服务状态，应该调用云存储来设置初始状态
+    // wx.setStorage({
+    //   key: 'cloudStore',
+    //   data: that.data.cloudStore,
+    // })
 
     if (this.data.cloudStore.cloudFlag) {
       this.cloudUpdate()
@@ -68,8 +115,9 @@ Page({
   },
 
   cloudUpdate: function() {
+    console.log("cloudUpdate")
     var that = this
-    db.collection('scoreBoardHome').doc(this.data.cloudStore.homeid).update({
+    db.collection(dataBaseCollectionName).doc(this.data.cloudStore.homeid).update({
       data: {
         namelist: that.data.namelist
       },
@@ -179,8 +227,8 @@ Page({
     this.data.cloudStore.cloudFlag = Boolean(e.detail.value)
 
     if (this.data.cloudStore.cloudFlag == true) {
-    // 上传到云服务器
-        this.createHome()
+      // 上传到云服务器
+      this.createHome()
     }
 
     if (this.data.cloudStore.cloudFlag == false) {
@@ -197,8 +245,8 @@ Page({
   },
 
   deleteHome: function() {
-    var that=this
-    db.collection('scoreBoardHome').doc(this.data.cloudStore.homeid).remove({
+    var that = this
+    db.collection(dataBaseCollectionName).doc(this.data.cloudStore.homeid).remove({
       success(res) {
         console.log(res)
         that.data.cloudStore.homeid = ""
@@ -212,10 +260,9 @@ Page({
   },
 
   createHome: function() {
-    // 暂时创建房号为1
     var that = this
-    var id = "2"
-    db.collection('scoreBoardHome').add({
+    var id = "1"
+    db.collection(dataBaseCollectionName).add({
       data: {
         _id: id,
         due: new Date(),
@@ -227,8 +274,8 @@ Page({
       that.setData({
         cloudStore: that.data.cloudStore
       })
-      that.storge()
-    }).catch(res=>{
+      // that.storge()
+    }).catch(res => {
       console.error(res)
     })
   }
