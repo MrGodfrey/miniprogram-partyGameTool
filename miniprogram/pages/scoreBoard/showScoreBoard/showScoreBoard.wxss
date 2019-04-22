@@ -1,0 +1,40 @@
+/* miniprogram/pages/scoreBoard/showScoreBoard/showScoreBoard.wxss */
+@import "../scoreBoard.wxss";
+
+.page__bd {
+  padding-bottom: 70rpx;
+}
+
+
+.name {
+  width: 30%;
+  padding-left: 10%
+}
+
+.score {
+  width: 10%;
+  float: right;
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .nameBar {
+  margin-bottom: 20px;
+  margin-top: 10px;
+  width: 100%;
+  height: 40px;
+}
+
+.name {
+  height: 40px;
+  line-height: 40px;
+  margin-right: 20px;
+  font-size: 1.2em;
+
+}
+
+.score {
+  width: 20px;
+  text-align: right;
+}
+}

@@ -34,12 +34,6 @@ Page({
 
     this.data.addValue = wx.getStorageSync('addValue') ? wx.getStorageSync('addValue') : 1
 
-    // 这里应当用云存储设置状态
-    // this.data.cloudStore = wx.getStorageSync('cloudStore') ? wx.getStorageSync('cloudStore') : {
-    //   cloudFlag: false,
-    //   homeid: ""
-    // }
-
     // 设置云存储的状态，当前openid是否有云存储的房间号.
     this.getCloudStatus()
 
@@ -59,16 +53,15 @@ Page({
     }).then(res => {
       that.data.openid = res.result.openid
       changeCloudStatus()
-
     })
 
     function changeCloudStatus() {
       db.collection(dataBaseCollectionName).where({
         _openid: that.data.openid
-      }).get().then(res=>{
+      }).get().then(res => {
         // 没有记录
-        if(res.data.length==0){
-          that.data.cloudStore={
+        if (res.data.length == 0) {
+          that.data.cloudStore = {
             cloudFlag: false,
             homeid: ""
           }
@@ -79,14 +72,24 @@ Page({
             cloudFlag: true,
             homeid: res.data[0]._id
           }
+          // 将本地数据更新到云端
+          db.collection(dataBaseCollectionName).doc(that.data.homeid).update({
+            data: {
+              namelist: that.data.namelist
+            },
+            success(res) {
+              console.log("namelist update successful")
+            }
+          })
         }
         that.setData({
-          cloudStore: that.data.cloudStore
+          cloudStore: that.data.cloudStore,
         })
-      }).catch(res=>{
+      }).catch(res => {
         console.error(res)
       })
     }
+
   },
 
   onHide: function() {
@@ -132,11 +135,20 @@ Page({
       this.setData({
         optionHide: "inline",
       })
+      wx.pageScrollTo({
+        scrollTop: 1000,
+        duration: 300
+      })
     } else {
       this.setData({
         optionHide: "None",
       })
+      wx.pageScrollTo({
+        scrollTop: 0,
+        duration: 300
+      })
     }
+    
   },
 
   onUnload: function() {
@@ -190,7 +202,6 @@ Page({
   },
 
   nameinput: function(e) {
-    console.log(e)
     var newplayer = {}
     newplayer.name = e.detail.value
     newplayer.score = 0
@@ -277,6 +288,36 @@ Page({
       // that.storge()
     }).catch(res => {
       console.error(res)
+    })
+  },
+
+  homeidInput: function(e) {
+    var showHomeid = e.detail.value
+    this.setData({
+      inputValue: ""
+    })
+    wx.showLoading({
+      title: '加载中',
+    })
+    db.collection(dataBaseCollectionName).where({
+      _id: showHomeid
+    }).get().then(res => {
+      wx.hideLoading()
+      // 没找到房号
+      if (res.data.length == 0) {
+        wx.showToast({
+          title: "未找到房间# " + showHomeid,
+          icon: 'none',
+          duration: 2000,
+        });
+      } else {
+        wx.redirectTo({
+          url: 'showScoreBoard/showScoreBoard?id=' + showHomeid,
+          fail(res) {
+            console.log(res)
+          }
+        })
+      }
     })
   }
 
