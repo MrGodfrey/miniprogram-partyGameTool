@@ -28,23 +28,31 @@
       </view>
     </block>
   </view>
-  <view class='name-input-tag' style='display: {{deleteReverse}}'>
-    <input class='name-input' placeholder=' 新玩家' confirm-type='send' bindconfirm='nameinput' value="{{inputValue}}"></input>
-  </view>
 
+  <view class='button-bar'>
+
+
+    <view class='name-input-tag' style='display: {{deleteReverse}}'>
+      <input class='name-input' placeholder=' 新玩家' confirm-type='send' bindconfirm='nameinput' value="{{inputValue}}"></input>
+    </view>
+
+  </view>
   <view class='optionIcon' style='display: {{deleteReverse}}'>
     <icon type="info_circle" size="35" bindtap='optionTap'></icon>
   </view>
 
   <view class='option' style='display: {{optionHide}}'>
 
-    <view wx:if="{{cloudStore.cloudFlag==false}}" class='name-input-tag' style='display: {{deleteReverse}}'>
-      <input class='name-input' placeholder=' 您的房号' confirm-type='send' bindconfirm='homeidInput' value="{{inputValue}}"></input>
+    <view class='button-bar' style='display: {{deleteReverse}}'>
+
+      <view class='name-input-tag' style='display: {{deleteReverse}}'>
+        <input class='name-input' placeholder=' 显示别的房号' confirm-type='send' bindconfirm='homeidInput' value="{{inputValue}}"></input>
+      </view>
     </view>
 
     <slider bindchanging='sliderChange' style='display: {{deleteReverse}}' class='slider' show-value value="{{addValue}}" min='1' max='30' />
 
-    <view class='button-bar'>
+    <view class='button-bar' style='display: {{deleteReverse}}'>
       <view class='button-tag'>上传到云</view>
       <switch class='switch' checked="{{cloudStore.cloudFlag}}" bindchange='cloudSwitchChange'></switch>
     </view>
