@@ -33,6 +33,8 @@ Page({
 
   onPullDownRefresh: function() {
     this.getCloudStatus()
+    wx.hideLoading()
+    wx.stopPullDownRefresh()
   },
 
   getCloudStatus: function() {
@@ -57,7 +59,14 @@ Page({
       })
     }).catch(res=>{
       wx.hideLoading()
+      wx.showToast({
+        title: '不存在该房间',
+        icon: 'none',
+        duration: 3000,
+      })
+      setTimeout(wx.navigateBack,2000,1)
     })
+    wx.hideLoading()
 
 
   },
