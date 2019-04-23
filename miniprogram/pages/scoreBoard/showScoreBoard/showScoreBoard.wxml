@@ -5,7 +5,7 @@
 
 <view class="page__hd">
   <view class="page__title">积分榜</view>
-  <view class="page__desc">快速记录每个玩家的分数</view>
+  <view class="page__desc">查看当前房间的分数</view>
 </view>
 
 

@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/index",
-    "pages/mask/mask",
     "pages/scoreBoard/scoreBoard",
     "pages/scoreBoard/showScoreBoard/showScoreBoard"
   ],
