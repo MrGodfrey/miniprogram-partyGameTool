@@ -29,7 +29,7 @@
     </block>
   </view>
 
-  <view class='eighty'>
+  <view wx:if="{{namelist.length}}" class='eighty'>
     
       <view class='modlist'>
       
