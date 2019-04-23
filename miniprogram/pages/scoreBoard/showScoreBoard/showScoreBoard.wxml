@@ -24,6 +24,14 @@
     </block>
   </view>
 
+  <view class='eighty'>
+    <view class='modlist'>
+      <block wx:for="{{lastMod}}" wx:key="unique">
+        <view class='modlist-tag size-{{index}}'> {{item}} </view>
+      </block>
+    </view>
+  </view>
+
 </view>
 
 

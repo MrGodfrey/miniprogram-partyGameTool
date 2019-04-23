@@ -9,7 +9,8 @@ Page({
   data: {
     namelist: [],
     homeid: "",
-    lastMod: new Date()
+    lastModData: new Date(),
+    lastMod: []
   },
 
   onLoad: function(option) {
@@ -47,9 +48,11 @@ Page({
 
       console.log(res)
       that.data.namelist=res.data.namelist
-      that.data.lastMod=res.data.due
+      that.data.lastModData=res.data.due
+      that.data.lastMod=res.data.lastMod
       that.setData({
         namelist: that.data.namelist,
+        lastModData: that.data.lastModData,
         lastMod: that.data.lastMod
       })
     }).catch(res=>{

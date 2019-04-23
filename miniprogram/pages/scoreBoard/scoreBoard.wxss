@@ -1,5 +1,37 @@
 /* miniprogram/pages/scoreBoard/scoreBoard.wxss */
 
+.eighty {
+  display: block;
+  width: 80%;
+  margin: 20px auto;
+  margin-top: 0; 
+  height: auto;
+  text-align: center;
+}
+
+
+.modlist {
+  font-size: 1em;
+  display: inline-block;
+  width: 50%;
+}
+
+.modlist-tag {
+  margin: 10px 0;
+}
+
+.size-0 {
+  color: rgb(128, 128, 128);
+}
+
+.size-1 {
+  color: rgb(165, 165, 165);
+}
+
+.size-2 {
+  color: rgb(219, 219, 219);
+}
+
 .button-bar {
   width: 80%;
   margin: 10px auto;
@@ -23,7 +55,7 @@
   text-align: center;
   margin-bottom: 30rpx;
   font-size: 1.2rem;
-  color: grey;
+  color: rgb(61, 61, 61);
   padding-bottom: 20px;
 }
 

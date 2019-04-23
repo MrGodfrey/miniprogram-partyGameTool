@@ -13,6 +13,7 @@ Page({
       cloudFlag: false,
       homeid: ""
     },
+    lastMod: [],
     openid: "",
     deleteState: "None",
     deleteString: "删除玩家",
@@ -23,16 +24,9 @@ Page({
   },
 
   onLoad: function() {
-    var res = wx.getStorageSync('namelist')
-    var len = res.length
-    for (var i = 0; i < len; i++) {
-      var newplayer = {}
-      newplayer.name = res[i].name
-      newplayer.score = res[i].score
-      this.data.namelist.push(newplayer)
-    }
-
+    this.data.namelist = this.data.lastMod = wx.getStorageSync('namelist') ? wx.getStorageSync('namelist') : []
     this.data.addValue = wx.getStorageSync('addValue') ? wx.getStorageSync('addValue') : 1
+    this.data.lastMod = wx.getStorageSync('lastMod') ? wx.getStorageSync('lastMod') : []
 
     // 设置云存储的状态，当前openid是否有云存储的房间号.
     this.getCloudStatus()
@@ -41,7 +35,8 @@ Page({
     this.setData({
       namelist: this.data.namelist,
       addValue: this.data.addValue,
-      cloudStore: this.data.cloudStore
+      cloudStore: this.data.cloudStore,
+      lastMod: this.data.lastMod
     })
   },
 
@@ -106,11 +101,10 @@ Page({
       key: 'addValue',
       data: that.data.addValue,
     })
-    // 不能本地存储云服务状态，应该调用云存储来设置初始状态
-    // wx.setStorage({
-    //   key: 'cloudStore',
-    //   data: that.data.cloudStore,
-    // })
+    wx.setStorage({
+      key: 'lastMod',
+      data: that.data.lastMod,
+    })
 
     if (this.data.cloudStore.cloudFlag) {
       this.cloudUpdate()
@@ -122,7 +116,8 @@ Page({
     var that = this
     db.collection(dataBaseCollectionName).doc(this.data.cloudStore.homeid).update({
       data: {
-        namelist: that.data.namelist
+        namelist: that.data.namelist,
+        lastMod: that.data.lastMod
       },
       success(res) {
         console.log(res)
@@ -148,7 +143,7 @@ Page({
         duration: 300
       })
     }
-    
+
   },
 
   onUnload: function() {
@@ -170,30 +165,30 @@ Page({
     })
   },
 
-  addScore: function(e) {
+  addScore: function(e, flag = true) {
     var index = e.target.dataset.player
-    this.data.namelist[index].score += this.data.addValue
+    if (flag) {
+      this.data.namelist[index].score += this.data.addValue
+    } else {
+      this.data.namelist[index].score -= this.data.addValue
+
+    }
+    var name = this.data.namelist[index].name
+    var value = this.data.addValue
+    var addTag = " +"
+    if (!flag) {
+      addTag = " -"
+    }
+    if (this.data.lastMod.unshift(name + addTag + value) > 3) {
+      this.data.lastMod.pop()
+    }
     this.setData({
-      namelist: this.data.namelist
+      namelist: this.data.namelist,
+      lastMod: this.data.lastMod
     })
     var that = this
     wx.showToast({
-      title: that.data.namelist[index].name + '  +' + that.data.addValue,
-      icon: 'success',
-      duration: 500,
-      mask: true
-    });
-    this.storge()
-  },
-  minusScore: function(e) {
-    var index = e.target.dataset.player
-    this.data.namelist[index].score -= this.data.addValue
-    this.setData({
-      namelist: this.data.namelist
-    })
-    var that = this
-    wx.showToast({
-      title: that.data.namelist[index].name + '  -' + that.data.addValue,
+      title: that.data.namelist[index].name + addTag + that.data.addValue,
       icon: 'success',
       duration: 500,
       mask: true
@@ -201,16 +196,8 @@ Page({
     this.storge()
   },
 
-  nameinput: function(e) {
-    var newplayer = {}
-    newplayer.name = e.detail.value
-    newplayer.score = 0
-    this.data.namelist.push(newplayer)
-    this.setData({
-      namelist: this.data.namelist,
-      inputValue: ""
-    })
-    this.storge()
+  minusScore: function(e) {
+    this.addScore(e, false)
   },
 
 
@@ -273,14 +260,14 @@ Page({
     })
   },
 
-  createHome: function(){
+  createHome: function() {
     wx.pageScrollTo({
       scrollTop: 0,
     })
     wx.showLoading({
       title: '生成房号中'
     })
-    var that=this
+    var that = this
     wx.cloud.callFunction({
       name: 'homeidGenerate',
       complete: res => {
@@ -337,6 +324,23 @@ Page({
           }
         })
       }
+    })
+  },
+
+  nameinput: function(e) {
+    var name = e.detail.value
+    if (name != "") {
+      this.data.namelist.push({
+        name: name,
+        score: 0
+      })
+      this.setData({
+        namelist: this.data.namelist
+      })
+      this.storge()
+    }
+    this.setData({
+      inputValue: ""
     })
   }
 
