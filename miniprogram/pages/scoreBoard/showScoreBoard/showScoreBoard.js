@@ -9,7 +9,7 @@ Page({
   data: {
     namelist: [],
     homeid: "",
-    lastModData: new Date(),
+    // lastModDate: new Date(),
     lastMod: []
   },
 
@@ -48,11 +48,11 @@ Page({
 
       console.log(res)
       that.data.namelist=res.data.namelist
-      that.data.lastModData=res.data.due
+      that.data.lastModDate = res.data.due.toTimeString().slice(0, 8)
       that.data.lastMod=res.data.lastMod
       that.setData({
         namelist: that.data.namelist,
-        lastModData: that.data.lastModData,
+        lastModDate: that.data.lastModDate,
         lastMod: that.data.lastMod
       })
     }).catch(res=>{

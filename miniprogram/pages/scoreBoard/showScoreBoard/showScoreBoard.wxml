@@ -32,6 +32,10 @@
     </view>
   </view>
 
+  <view wx:if="{{lastModDate}}" class='eighty'>
+    <view class='modlist-tag time'>修改时间: {{lastModDate}}</view>
+  </view>
+
 </view>
 
 

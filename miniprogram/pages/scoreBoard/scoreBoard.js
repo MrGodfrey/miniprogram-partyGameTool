@@ -117,7 +117,8 @@ Page({
     db.collection(dataBaseCollectionName).doc(this.data.cloudStore.homeid).update({
       data: {
         namelist: that.data.namelist,
-        lastMod: that.data.lastMod
+        lastMod: that.data.lastMod,
+        due: new Date()
       },
       success(res) {
         console.log(res)

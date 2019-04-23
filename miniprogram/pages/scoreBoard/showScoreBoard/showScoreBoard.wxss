@@ -11,6 +11,11 @@
   padding-left: 10%
 }
 
+.time {
+  color: skyblue;
+  font-size: 0.8em;
+}
+
 .score {
   width: 10%;
   float: right;
