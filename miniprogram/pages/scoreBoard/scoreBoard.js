@@ -256,6 +256,9 @@ Page({
   },
 
   deleteHome: function() {
+    wx.pageScrollTo({
+      scrollTop: 0,
+    })
     var that = this
     db.collection(dataBaseCollectionName).doc(this.data.cloudStore.homeid).remove({
       success(res) {
@@ -270,9 +273,24 @@ Page({
     })
   },
 
-  createHome: function() {
+  createHome: function(){
+    wx.pageScrollTo({
+      scrollTop: 0,
+    })
+    wx.showLoading({
+      title: '生成房号中'
+    })
+    var that=this
+    wx.cloud.callFunction({
+      name: 'homeidGenerate',
+      complete: res => {
+        that.createHomeByid(res.result.id)
+      }
+    })
+  },
+
+  createHomeByid: function(id) {
     var that = this
-    var id = "1"
     db.collection(dataBaseCollectionName).add({
       data: {
         _id: id,
@@ -285,6 +303,7 @@ Page({
       that.setData({
         cloudStore: that.data.cloudStore
       })
+      wx.hideLoading()
       // that.storge()
     }).catch(res => {
       console.error(res)

@@ -17,6 +17,7 @@
 </navigator>
 </view>
 
+<!-- <button bindtap='test'>test</button> -->
 
 <!-- <view  class=' nav'>
 <navigator url='mask/mask' >
