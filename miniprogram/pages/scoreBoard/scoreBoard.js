@@ -156,7 +156,19 @@ Page({
     this.setData({
       namelist: this.data.namelist,
     })
+    if(this.data.namelist.length==0){
+      this.clearAll()
+    }
     this.storge()
+  },
+
+  clearAll: function() {
+    this.data.namelist=[]
+    this.data.lastMod=[]
+    this.setData({
+      namelist: this.data.namelist,
+      lastMod:this.data.lastMod
+    })
   },
 
   sliderChange: function(e) {

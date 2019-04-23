@@ -18,7 +18,7 @@ exports.main = async(event, context) => {
   // 随机数生成器
   function mathRand() {
     num = ""
-    for (var i = 0; i < 6; i++) {
+    for (var i = 0; i < 3; i++) {
       num += Math.floor(Math.random() * 10);
     }
   }
