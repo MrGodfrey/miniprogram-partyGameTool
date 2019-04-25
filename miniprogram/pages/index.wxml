@@ -17,11 +17,13 @@
 </navigator>
 </view>
 
-<view  class=' nav'>
-<navigator url='mask/mask' >
+<!-- <button bindtap='test'>test</button> -->
+
+<!-- <view  class=' nav'>
+<navigator url='scoreBoard/showScoreBoard/showScoreBoard?id=487' >
 <view class='nav-item'> 谁是卧底 </view>
 </navigator>
-</view>
+</view> -->
 
 <button bindtap='test'>Fuck</button>
 

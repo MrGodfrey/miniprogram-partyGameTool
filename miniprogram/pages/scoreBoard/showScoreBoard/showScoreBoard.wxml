@@ -1,0 +1,44 @@
+<!--miniprogram/pages/scoreBoard/scoreBoard.wxml-->
+<!--index.wxml-->
+
+
+
+<view class="page__hd">
+  <view class="page__title">积分榜</view>
+  <view class="page__desc">查看当前房间的分数</view>
+</view>
+
+
+
+<view class="page__bd">
+
+  <view class='homeid'># {{homeid}}</view>
+
+
+  <view class="container">
+    <block class="name-list" wx:for="{{namelist}}" wx:key="unique">
+      <view class='nameBar'>
+        <view class='name'>{{item.name}}</view>
+        <view class='name score'>{{item.score}}</view>
+      </view>
+    </block>
+  </view>
+
+  <view wx:if="{{namelist.length}}" class='eighty'>
+    <view class='modlist'>
+      <block wx:for="{{lastMod}}" wx:key="unique">
+        <view class='modlist-tag size-{{index}}'> {{item}} </view>
+      </block>
+    </view>
+  </view>
+
+  <view wx:if="{{lastModDate}}" class='eighty'>
+    <view class='modlist-tag time'>修改时间: {{lastModDate}}</view>
+  </view>
+
+</view>
+
+
+<view class="page__ft">
+  designed by: Wang Yu
+</view>
