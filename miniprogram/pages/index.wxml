@@ -20,7 +20,7 @@
 <!-- <button bindtap='test'>test</button> -->
 
 <!-- <view  class=' nav'>
-<navigator url='scoreBoard/showScoreBoard/showScoreBoard?id=487' >
+<navigator url='scoreBoard/scoreBoardHelp/scoreBoardHelp' >
 <view class='nav-item'> 谁是卧底 </view>
 </navigator>
 </view> -->

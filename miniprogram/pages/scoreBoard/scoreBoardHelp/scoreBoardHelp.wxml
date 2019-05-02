@@ -1,0 +1,57 @@
+<!--miniprogram/pages/scoreBoard/scoreBoardHelp/scoreBoardHelp.wxml-->
+
+<view class="page__hd">
+  <view class="page__title">帮助</view>
+</view>
+
+
+
+<view class="page__bd">
+
+  <view class='section'>
+    <view class='section-title'> 添加新玩家</view>
+    <view class='section-body'>点击新玩家输入框, 输入玩家的名字，点击发送。</view>
+  </view>
+
+  <view class='section'>
+    <view class='section-title'> 删除玩家</view>
+    <view class='section-body'>
+      <view class='order-list'>
+        <view class='list-item'>1. 点击设置按钮（蓝色的齿轮）， 打开设置菜单</view>
+        <view class='list-item'>2. 点击红色的删除玩家按钮</view>
+        <view class='list-item'>3. 点击玩家名左边的删除按钮</view>
+        <view class='list-item'>4. 删除完成后点击绿色的完成</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='section'>
+    <view class='section-title'> 与他人共享</view>
+    <view class='section-body'>
+      <view class='section-p green'>一起玩的朋友可以看到您记录的分数！</view>
+
+      <view class='section-p'>打开设置菜单，打开上传到云开关，稍后会在玩家列表上方生成房号：“#1234”（示例）</view>
+
+      <view class='section-p'>将小程序分享给玩伴，玩伴可以打开设置按钮，在“显示别的房号”中输入刚生成的房号1234,即可查看当前房间分数。</view>
+
+      <view class='section-p'>查看页下拉可刷新。</view>
+      
+    </view>
+  </view>
+
+  <view class='section'>
+    <view class='section-title'> 打开设置</view>
+    <view class='section-body'>点击设置按钮（蓝色的齿轮）， 打开设置菜单，再按一下设置按钮关闭菜单。</view>
+  </view>
+
+  <view class='section'>
+    <view class='section-title'> 一次点击增加分数</view>
+    <view class='section-body'>点击设置按钮，滑动滑块，即可修改一次点击增加分数。</view>
+  </view>
+  
+
+</view>
+
+<view class="page__ft">
+  designed by: Wang Yu
+</view>

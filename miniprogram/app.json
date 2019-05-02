@@ -2,7 +2,8 @@
   "pages": [
     "pages/index",
     "pages/scoreBoard/scoreBoard",
-    "pages/scoreBoard/showScoreBoard/showScoreBoard"
+    "pages/scoreBoard/showScoreBoard/showScoreBoard",
+    "pages/scoreBoard/scoreBoardHelp/scoreBoardHelp"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -10,5 +11,6 @@
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "聚会游戏工具",
     "navigationBarTextStyle": "black"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

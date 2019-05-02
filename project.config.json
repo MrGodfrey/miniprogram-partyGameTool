@@ -11,6 +11,8 @@
 	"appid": "wxc753cabeb6ed3a82",
 	"projectname": "miniprogram-mask",
 	"libVersion": "2.2.5",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

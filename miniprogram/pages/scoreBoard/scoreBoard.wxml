@@ -30,13 +30,13 @@
   </view>
 
   <view wx:if="{{namelist.length}}" class='eighty'>
-    
-      <view class='modlist'>
-      
+
+    <view class='modlist'>
+
       <block wx:for="{{lastMod}}" wx:key="unique">
-       <view class='modlist-tag size-{{index}}'  > {{item}} </view> 
+        <view class='modlist-tag size-{{index}}'> {{item}} </view>
       </block>
-       </view>
+    </view>
   </view>
 
 
@@ -47,7 +47,7 @@
   </view>
 
   <view class='optionIcon' style='display: {{deleteReverse}}'>
-    <icon type="info_circle" size="35" bindtap='optionTap'></icon>
+    <image class='option-button'  src="../../image/option.png" bindtap='optionTap'></image>
   </view>
 
   <view class='option' style='display: {{optionHide}}'>
@@ -71,6 +71,13 @@
     </view>
 
 
+  </view>
+
+  <!-- 帮助按钮 -->
+  <view>
+    <view bindtap='helpButton'>
+      <image class="help_icon" src="../../image/help.png"></image>
+    </view>
   </view>
 
 </view>

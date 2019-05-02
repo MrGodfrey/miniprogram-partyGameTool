@@ -157,18 +157,18 @@ Page({
     this.setData({
       namelist: this.data.namelist,
     })
-    if(this.data.namelist.length==0){
+    if (this.data.namelist.length == 0) {
       this.clearAll()
     }
     this.storge()
   },
 
   clearAll: function() {
-    this.data.namelist=[]
-    this.data.lastMod=[]
+    this.data.namelist = []
+    this.data.lastMod = []
     this.setData({
       namelist: this.data.namelist,
-      lastMod:this.data.lastMod
+      lastMod: this.data.lastMod
     })
   },
 
@@ -354,6 +354,15 @@ Page({
     }
     this.setData({
       inputValue: ""
+    })
+  },
+
+  helpButton: function() {
+    wx.navigateTo({
+      url: 'scoreBoardHelp/scoreBoardHelp',
+      success: function(res) {console.log('help page')},
+      fail: function(res) {},
+      complete: function(res) {},
     })
   }
 
